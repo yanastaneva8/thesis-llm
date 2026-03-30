@@ -8,6 +8,9 @@ from pathlib import Path
 import arxiv
 import yaml
 
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
 def load_config():
     with open("config.yaml") as f:
         return yaml.safe_load(f)
@@ -54,7 +57,7 @@ def extract_source(source_file, paper_dir):
     else:
         source_file.rename(paper_dir / "main.tex")
 
-    tex_files = list(paper_dir.glob("**.*.tex"))
+    tex_files = list(paper_dir.glob("*.tex"))
     return len(tex_files) > 0
 
 def download_paper(result, paper_dir):
@@ -63,7 +66,7 @@ def download_paper(result, paper_dir):
     try:
         source_path = result.download_source(dirpath=str(paper_dir), filename="source")
     except Exception as error:
-        if paper_dir.exists() and not any(paper_dir.iterdit()):
+        if paper_dir.exists() and not any(paper_dir.iterdir()):
             paper_dir.rmdir()
         raise error
     
@@ -153,7 +156,7 @@ def fetch_papers(config, max_override=None, dry_run=False):
 
         all_metadata.append(metadata)
         save_manifest(manifest_path, all_metadata)
-        stats["failed"] +=1
+        stats["fetched"] +=1
 
     print(f"\n('=' * 50)")
     print(f"Done.")
