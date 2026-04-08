@@ -141,7 +141,7 @@ methods, and open problems in the field. [Abstract to be refined.]
                                                                                                                                                                                                                     
 \\tableofcontents                                                                                                                                                                                                   
                 
-\\section{{Introduction}}                                                                                                                                                                                           
+# \\section{{Introduction}} -- Removed, as the LLM is prompted to include it in the outline
                 
 {body}                                                                                                                                                                                                              
                 

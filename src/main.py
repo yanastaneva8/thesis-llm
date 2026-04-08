@@ -61,6 +61,8 @@ def cmd_embed(args):
                 parts.append(f"Title: {chunk['title']}")                                                                                                                                                            
             if chunk.get("section"):                                                                                                                                                                                
                 parts.append(f"Section: {chunk['section']}")                                                                                                                                                        
+            if chunk.get("citation_key"):
+                parts.append(f"Citation Key: {chunk['citation_key']}")
             parts.append(chunk["content"])                                                                                                                                                                          
             embed_text = "\n".join(parts)                                                                                                                                                                           
                                                                                                                                                                                                                     
@@ -95,7 +97,12 @@ def cmd_embed(args):
                                                                                                                                                                                                                     
                                                                                                                                                                                                                     
 def cmd_topics(args):
-    from scripts import discover_topics                                                                                                                                                                             
+    # Filenames starting with numbers (04_...) are difficult to import.
+    # It is better to import the logic directly from src if available.
+    # If you must use the script, you can use importlib:
+    import importlib
+    topic_module = importlib.import_module("scripts.04_discover_topics")
+    
     # Import inline to avoid circular issues                                                                                                                                                                        
     import numpy as np                                                                                                                                                                                              
     import chromadb                                                                                                                                                                                                 
@@ -114,10 +121,14 @@ def cmd_topics(args):
     metadatas = results["metadatas"]                                                                                                                                                                                
     documents = results["documents"]                                                                                                                                                                                
                                                                                                                                                                                                                     
-    print(f"Clustering {len(embeddings)} chunks into {args.clusters} groups...\n")                                                                                                                                  
-                                                                                                                                                                                                                    
-    from src.topic_discovery import cluster_and_display                                                                                                                                                             
-    cluster_and_display(embeddings, metadatas, documents, args.clusters)
+    print(f"Clustering {len(embeddings)} chunks into {args.clusters} groups...\n")
+
+    # Note: Ensure src/topic_discovery.py exists or use the logic from 04_discover_topics.py
+    try:
+        from src.topic_discovery import cluster_and_display
+        cluster_and_display(embeddings, metadatas, documents, args.clusters)
+    except ImportError:
+        print("Error: src.topic_discovery not found. Ensure topic discovery logic is properly modularized.")
                                                                                                                                                                                                                     
                                                                                                                                                                                                                     
 def cmd_generate(args):                                                                                                                                                                                             

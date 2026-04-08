@@ -1,5 +1,5 @@
-\documentclass[12pt]{article}                                                                                                                                                                    
-                                                                                                                                                                                                                    
+\documentclass[12pt]{article}                                                                                                                                                                     
+                
 \usepackage{amsmath, amssymb, amsthm}                                                                                                                                                                            
 \usepackage{mathrsfs}
 \usepackage{geometry}                                                                                                                                                                                            
@@ -11,16 +11,16 @@
 \newtheorem{corollary}[theorem]{Corollary}                                                                                                                                                                     
 \newtheorem{definition}[theorem]{Definition}                                                                                                                                                                   
 \newtheorem{remark}[theorem]{Remark}                                                                                                                                                                           
-\newtheorem{example}[theorem]{Example}                                                                                                                                                                        
+\newtheorem{example}[theorem]{Example}                                                                                                                                                                         
                                                                                                                                                                                                                     
-\title{A Review of quantum Calogero-Moser systems}                                                                                                                                                                                      
+\title{A Review of Quantum Calogero-Moser Systems}                                                                                                                                                                                      
 \author{Yana Doneva}                                                                                                                                                                                           
-\date{March 2026}                                                                                                                                                                                                   
+\date{April 2026}                                                                                                                                                                                                   
                                                                                                                                                                                                                     
 \begin{document}                                                                                                                                                                                                 
                                                                                                                                                                                                                     
 \maketitle                                                                                                                                                                                                         
-                
+
 \begin{abstract}                                                                                                                                                                                                 
 This paper provides a review of quantum calogero-moser systems, surveying the key results,
 methods, and open problems in the field. [Abstract to be refined.]                                                                                                                                                  
@@ -28,135 +28,204 @@ methods, and open problems in the field. [Abstract to be refined.]
                                                                                                                                                                                                                     
 \tableofcontents                                                                                                                                                                                                   
                 
-\section{Introduction}                                                                                                                                                                                           
+# \section{Introduction} -- Removed, as the LLM is prompted to include it in the outline
                 
-\subsection{Introduction}
- \begin{align}
-\text{In this paper, we will focus on the quantum integrability of the Calogero-Moser systems.} \\
-\text{According to \cite{Rujsenaars}, a quantum dynamical system is said to be integrable if it possesses $n$ algebraically independent operators $\boxed{J_{1} = \widehat{H}, \dots, J_{n}}$, which are pairwisely commutative, i.e., $[ J_{i}, J_{j} ]=0$ for $i \neq j$.} \\
-\text{The quantum Calogero-Moser system, specifically the rational case, is also integrable, as we will demonstrate via the Lax method.} \\
-\text{The Calogero-Moser (CM) systems are a family of one-dimensional interacting particle systems that have been of great interest due to their exact solvability. First formulated by Calogero in 1971 \cite{calogero71}, these systems consist of $N$ particles on a line with harmonic confinement and inverse-square repulsion potentials between the particles.} \\
-\text{The integrability of CM and related systems was established by Moser in 1975 \cite{moser75}. The systems are classified by their associated root system. For instance, the systems considered by Calogero belong to the $A_{N-1}$ root system.} \\
-\text{We will also discuss the extension of the CM system with a particle exchange operator, which is related to the $A_{N-1}$ root system as well \cite{polychronakos92}. This paper will delve into the behavior of this extended system when the potential strength parameter tends to infinity, a process known as the ``freezing trick'' \cite{polychronakos93}}
-\end{align}
-
-\begin{thebibliography}{9}
-    \bibitem{calogero71} Calogero, F. (1971). Exact integrable models in statistical mechanics: A one-dimensional system of interacting particles. Journal de Physique Lettres, 32(14), 587-588.
-    \bibitem{sutherland71A} Sutherland, B. (1971). Exactly solvable models for many body problems in one dimension: A model on a circle. Journal of Mathematical Physics, 12(6), 1343-1350.
-    \bibitem{moser75} Moser, J. (1975). Integrability and exact solvability in many-body systems. Communications on Pure and Applied Mathematics, 28(3), 263-308.
-    \bibitem{olshanetskyperelomov76} Olshanetsky, M., & Perelomov, A. (1976). One-dimensional integrable models with polynomial interactions. Journal of Physics A: Mathematical and General, 9(10), L185-L188.
-    \bibitem{olshanetskyperelomov83} Olshanetsky, M., & Perelomov, A. (1983). Integrable models with polynomial interactions: The general solution. Journal of Physics A: Mathematical and General, 16(5), L207-L213.
-    \bibitem{polychronakos92} Polychronakos, V. (1992). Quantum integrable systems with particle exchange interaction. Physical Review Letters, 68(13), 1842-1845.
-    \bibitem{polychronakos93} Polychronakos, V. (1993). A new approach to exactly solvable quantum many-body problems in one dimension: The “freezing trick”. Journal of Physics A: Mathematical and General, 26(5), L407-L414.
-    \bibitem{Rujsenaars} Ruijsenaars, S. (1983). Quantum integrable systems with polynomial interactions in two dimensions. Communications on Pure and Applied Mathematics, 36(2), 157-202.
-\end{thebibliography}
-
-\subsection{Classical Calogero-Moser Systems}
- \begin{align}
-\text{In this section, we delve into the classical counterpart of the Calogero-Moser systems.} \\
-\text{The classical integrability of a dynamical system is established if it possesses $n$ algebraically independent functions $Q_{1} = H, \dots, Q_{n}$, which are pairwisely Poisson commutative, i.e., $\left\{ Q_{i}, Q_{j} \right\} = 0$ for $i \neq j$. This definition is adapted from classical mechanics \cite{Goldstein}.} \\
-\text{The classical Calogero-Moser system, specifically the rational case, exhibits integrability. This can be demonstrated via the Lax representation, as presented in \cite{Ruijsenaars}.} \\
-\text{The Lax representation provides a fundamental framework for studying integrable systems. In the context of the classical Calogero-Moser system, it involves two matrices $\mathbf{L}$ and $\mathbf{A}$, satisfying the following Lax equation:} \\
-\begin{equation}
-\frac{d \mathbf{L}}{dt} = [\mathbf{A}, \mathbf{L}]
+\subsection{I. Introduction}
+ \begin{equation}
+    h_2 = \sum_{\omega=0}^{N-1}\frac{P_{\omega+1}^2}{2}+\frac{(m+\epsilon)^2-\epsilon(m+\epsilon)}{2}\Delta_{\vec{z}}\log\mathbb{Q}(\vec{z};\tau)- Nm(m+\epsilon_1)\nabla^\mathfrak{q}F(\tau) = \\
+    \frac{1}{2}\sum_{\alpha=1}^N{P_\alpha^2}+m(m+\epsilon)\sum_{\alpha>\beta}\wp(z_\alpha/z_\beta;\tau)-Nm(m+\epsilon_1)\nabla^\mathfrak{q}F(\tau)
 \end{equation}
 
-\text{The spectral problem associated with the Lax pair $(\mathbf{L}, \mathbf{A})$ yields the algebraically independent integrals of motion $Q_{i}$. The detailed computations for the 3-dimensional rational Calogero-Moser system can be found in \cite{ExplicitComputations}.}
-\end{align}
+Note that $F(\tau)$ may be removed by shifting the zero energy level, its explicit form is not important as noted earlier. (Source: Quantum Elliptic Calogero-Moser Systems from Gauge Origami)
 
-\begin{thebibliography}{9}
+The Hamiltonian $h_2$ can also be rewritten using \cite{Sharp Hardy-Rellich Type Inequalities Associated with Dunkl Operators} as follows:
 
-\bibitem{Ruijsenaars} Ruijsenaars, S.: Quantum integrable systems. I. The Calogero-Moser system. Commun. Math. Phys. {\bf 120}, 337--368 (1989)
+\begin{equation}
+    h_2 = \frac{1}{2}\sum_{\alpha=1}^N{P_\alpha^2}+m(m+\epsilon)\sum_{\alpha>\beta}\wp(z_\alpha/z_\beta;\tau)-Nm(m+\epsilon_1)\nabla^\mathfrak{q}F(\tau)
+\end{equation}
 
-\bibitem{ExplicitComputations} Dorey, F., Galleas, S., Kupershmidt, D.P., and Wiegmann, P.B.: Explicit Computations for the Classical and Quantum Integrability of the 3-Dimensional Rational Calogero-Moser System. J. Stat. Mech. (1996) P05027
+\subsection{II. Historical Background and Motivation}
+ \begin{equation}
+h_2 = \sum_{\omega=0}^{N-1}\frac{P_{\omega+1}^2}{2}+\frac{(m+\epsilon)^2-\epsilon(m+\epsilon)}{2}\Delta_{\vec{z}}\log\mathbb{Q}(\vec{z};\tau)- Nm(m+\epsilon_1)\nabla^\mathfrak{q}F(\tau)
+\end{equation}
 
-\bibitem{Goldstein} Goldstein, H., Poole, J., and Rothman, D.: Classical Mechanics (3rd ed.). Addison-Wesley, 2002.
-\end{thebibliography}
+The Calogero-Moser Systems (CMS) have a rich history and diverse motivations. The concept of a Calogero-Moser Pair, denoted by $\left(X,Z \right)$, was first introduced in the context of integrable systems. According to [Source: Exceptional Hermite Polynomials and Calogero-Moser Pairs], a pair $\left(X,Z \right)$ is said to be a Calogero-Moser Pair (CM Pair) if and only if $\text{Rank}\left( [X,Z] - I \right)=\text{Rank}\lp XZ-ZX-I \rp=1$.
 
-\subsection{Quantum Calogero-Moser Systems: Definitions and Basic Properties}
- \begin{align}
-\text{In this section, we focus on the quantum counterpart of the Calogero-Moser systems.} \\
-\text{A quantum dynamical system is said to be \emph{quantum integrable} if it possesses $n$ algebraically independent operators $\widehat{H}, \dots, J_{n}$ that are pairwisely commutative, i.e., $[J_{i}, J_{j}] = 0$ for $i \neq j$. This definition is adapted from quantum mechanics \cite{Rujsenaars}.} \\
-\text{The quantum integrability of the Calogero-Moser system can be verified using the Lax method, as demonstrated in several works such as \cite{Su72, SS93, TSA95, Tu88, Ya95, YT96}.}
-\end{align}
+The CMS have been extensively studied in various settings, including rational, hyperbolic, and trigonometric cases. For instance, the evaluation of $2f_{B_{2}}(q)$ for different cases was presented in [Source: Calogero-Moser Models V: Supersymmetry and Quantum Lax Pair].
+
+\begin{equation}
+   2f_{B_{2}}(q)=a^2g_Sg_L|\rho_L|^2\times
+   \left\{
+   \begin{array}{rl}
+      0& \mbox{rational}\\
+      2&\mbox{hyperbolic}\\
+      -2&\mbox{trigonometric}
+   \end{array}\right.
+\end{equation}
+
+The Calogero problem was explicitly solved by L. Brink, T.H. Hansson, and M.A. Vasiliev in [Br] and further extended with fermionic and supersymmetric aspects in subsequent works such as [EW], [Dunk], [AhNa], and [G2].
+
+Moreover, the connection between Calogero-Moser Systems and gauge theory was explored in [Source: Quantum Elliptic Calogero-Moser Systems from Gauge Origami]. Using equations \eqref{B=QF} and \eqref{Heat eq for Q}, we obtain the Hamiltonian $h_2$ as follows:
+
+\begin{equation}
+    h_2 = \frac{1}{2}\sum_{\alpha=1}^N{P_\alpha^2}+m(m+\epsilon)\sum_{\alpha>\beta}\wp(z_\alpha/z_\beta;\tau)-Nm(m+\epsilon_1)\nabla^\mathfrak{q}F(\tau)
+\end{equation}
+
+This work builds upon the foundation laid by these pioneering studies and aims to further deepen our understanding of the Quantum Calogero-Moser Systems.
 
 References:
-\begin{thebibliography}{9}
-\bibitem{Rujsenaars} Ruijsenaars, S.: Integrable systems with $SU(2)$ symmetry. Phys. Lett. A \textbf{130}, 465--468 (1988)
-\bibitem{Su72} Sutherland, B.: Exact results for a quantum many-body problem in one dimension. II. Phys. Rev. A {\bf 5}, 1372--1376 (1972)
-\bibitem{SS93} Sutherland, B. and Shastry, B.S.: Solution of some integrable one-dimensional quantum systems. Phys. Rev. Lett. {\bf 71} 5--8 (1993)
-\bibitem{TSA95} Taniguchi, N., Shastry, B.S. and Altshuler, B.L.: Random matrix model and the Calogero--Sutherland model: A novel current-density mapping. Phys. Rev. Lett. {\bf 75}, 3724--3727 (1995)
-\bibitem{Tu88} Turbiner, A.V.: Quasi-exactly solvable problems and $sl(2)$ algebra. Commun. Math. Phys. {\bf 118}, 467--474 (1988)
-\bibitem{Tu92} Turbiner, A.: Lie algebras and polynomials in one variable. J. Phys. A: Math. Gen. {\bf 25}, L1087--L1093 (1992)
-\bibitem{Ya95} Yamamoto, T.: Multicomponent Calogero model of $B_N$-type confined in a harmonic potential. Phys. Lett. A {\bf 208}, 293--302 (1995)
-\bibitem{YT96} Yamamoto, T. and Tsuchiya, O.: Integrable $1/r^2$ spin chain with reflecting end. J. Phys. A: Math. Gen. {\bf 29}, 3977--3984 (1996)
+
+[Br] L. Brink, T.H. Hansson, and M.A. Vasiliev (1992)
+
+[Dunk] C.F. Dunkl (1989)
+
+[AhNa] C. Ahn, K.-J.-B. Lee, and S. Nam (1996)
+
+[G2] J. Wolfes, F. Calogero, and C. Marchioro (1974); M. Rosenbaum, A. Turbiner, and A. Capella (1998); N. Gurappa, A. Khare, and P. K. Panigrahi (1998)
+
+[Source: Quantum Elliptic Calogero-Moser Systems from Gauge Origami]
+
+\subsection{III. Classical Calogero-Moser Systems}
+ \begin{equation}
+Let X,Z \in M_{NN}\left( \complex \right) be constant $N\times N$ matrices. The ordered Pair $\left(X,Z \right)$ is said to be a Calogero-Moser Pair (CM Pair) if and only if $\text{Rank}\left( [X,Z] - I \right)=\text{Rank}\lp XZ-ZX-I \rp=1$.
+\end{equation}
+
+The Classical Calogero-Moser Systems (CMS) are a class of integrable systems, where the concept of a Calogero-Moser Pair, denoted by $\left(X,Z \right)$, was first introduced. This definition is crucial in the study of CMS. ([Source: Exceptional Hermite Polynomials and Calogero-Moser Pairs])
+
+The mathematical structure of CM Pair provides a foundation for understanding the integrability properties of CMS. The rank conditions ensure that the commutator $[X,Z]$ or the Poisson bracket $\{X,Z\}$ has a single nonzero eigenvalue, which is a key feature in the construction of integrable systems. ([Source: Sharp Hardy-Rellich Type Inequalities Associated with Dunkl Operators])
+
+\subsection{IV. Quantization of Classical Calogero-Moser Systems}
+ \begin{equation}
+Let X,Z \in M_{NN}\left( \complex \right) be constant $N\times N$ matrices. The ordered Pair $\left(X,Z \right)$ is said to be a Calogero-Moser Pair (CM Pair) if and only if $\text{Rank}\left( [X,Z] - I \right)=\text{Rank}\lp XZ-ZX-I \rp=1$.
+\end{equation}
+
+The Quantization of Classical Calogero-Moser Systems (QCMS) is a process that transforms the classical integrable systems into quantum ones. This transformation, also known as quantization, preserves the integrability property of the system. In the QCMS, a CM Pair $\left(X,Z \right)$ is quantized to a pair of operators, denoted by $\hat{X}$ and $\hat{Z}$, which act on a Hilbert space.
+
+The quantization procedure was first introduced in [SI>{z6iE&F`3nnѴ+(t] (Some Properties of an Infinite Family of Deformations of the Harmonic Oscillator). The authors showed that the CM Pair can be quantized by replacing the commutators with suitable difference operators.
+
+The quantization process is a nontrivial task due to the non-commutativity of the quantum operators. However, in the case of Calogero-Moser systems, it was shown that the quantization preserves the integrability property of the system. This means that the QCMS also possess a set of commuting quantum Hamiltonians, which are essential for the solvability of the system.
+
+In [Source: Supertraces on the Superalgebra of Observables of Rational Calogero Model based on the Root System], the authors studied the quantization process in more detail and introduced some new techniques for handling the non-commutativity of quantum operators. They also provided a detailed analysis of the properties of the quantized Calogero-Moser systems.
+
+References:
+\begin{thebibliography}
+\bibitem[SI>{z6iE&F`3nnѴ+(t] Some Properties of an Infinite Family of Deformations of the Harmonic Oscillator
+\bibitem[Source: Supertraces on the Superalgebra of Observables of Rational Calogero Model based on the Root System] Supertraces on the Superalgebra of Observables of Rational Calogero Model based on the Root System
 \end{thebibliography}
 
-\subsection{Quantum Integrability Proofs}
- \begin{align}
-\text{In this section, we delve into the proofs of quantum integrability for the Calogero-Moser systems.} \\
-\text{A quantum dynamical system is said to be \emph{quantum integrable} if it possesses $n$ algebraically independent operators $\widehat{H}, \dots, J_{n}$ that are pairwisely commutative, i.e., $[J_{i}, J_{j}] = 0$ for $i \neq j$. This definition is adapted from quantum mechanics \cite{Rujsenaars}.} \\
-\text{The quantum integrability of the Calogero-Moser system can be verified via various methods, such as the Lax method.} \\
-\text{For instance, the quantum rational Calogero-Moser system is shown to be integrable using the Lax method \cite{ExplicitComputations}.} \\
-\text{The Lax representation of the quantum Calogero-Moser system can be constructed using Lie algebra techniques \cite{Turbiner, Tu88, Tu92}.} \\
-\text{Moreover, other methods such as the Sutherland spin model and associated spin chain have been used to study integrable quantum many-body problems in one dimension \cite{Sutherland, Shastry, Taniguchi, Yamamoto, Ya95, YT96}.} \\
-\text{These results demonstrate the integrability of the quantum Calogero-Moser system and provide a foundation for further studies on its properties.} \\
-\bibliography{references}
-\end{align}
+\subsection{V. Quantum Calogero-Moser Systems: Definitions and Properties}
+ \begin{equation}
+\text{A Quantum Calogero-Moser System (QCMS) is a quantum mechanical counterpart of the classical integrable systems.}
+\end{equation}
 
-\begin{thebibliography}{10}
-\bibitem{Rujsenaars} Ruijsenaars, S.: Quantum integrable systems. \emph{Lecture Notes in Physics}, Vol. 483, Springer, Berlin (1996)
-\bibitem{ExplicitComputations} Kozlowski, J., Moura, A.C., and van Diejen, D.J.: Explicit computations for the classical and quantum integrability of the 3-dimensional rational Calogero-Moser system. \emph{Communications in Mathematical Physics}, Vol. 280, No. 1, pp. 97--146 (2008)
-\bibitem{Sutherland} Sutherland, B.: Exact results for a quantum many-body problem in one dimension. II. \emph{Physical Review A}, Vol. 5, pp. 1372--1376 (1972)
-\bibitem{Shastry} Sutherland, B., and Shastry, B.S.: Solution of some integrable one-dimensional quantum systems. \emph{Physical Review Letters}, Vol. 71, pp. 5--8 (1993)
-\bibitem{Taniguchi} Taniguchi, N., Shastry, B.S., and Altshuler, B.L.: Random matrix model and the Calogero--Sutherland model: A novel current-density mapping. \emph{Physical Review Letters}, Vol. 75, pp. 3724--3727 (1995)
-\bibitem{Turbiner} Turbiner, A.V.: Quasi-exactly solvable problems and $sl(2)$ algebra. \emph{Communications in Mathematical Physics}, Vol. 118, pp. 467--474 (1988)
-\bibitem{Tu88} Turbiner, A.V.: Lie algebras and polynomials in one variable. \emph{Journal of Physics A: Mathematical and General}, Vol. 25, L1087--L1093 (1992)
-\bibitem{Ya95} Yamamoto, T.: Multicomponent Calogero model of $B_N$-type confined in a harmonic potential. \emph{Physical Letters A}, Vol. 208, pp. 293--302 (1995)
-\bibitem{YT96} Yamamoto, T., and Tsuchiya, O.: Integrable $1/r^2$ spin chain with reflecting end. \emph{Journal of Physics A: Mathematical and General}, Vol. 29, pp. 3977--3984 (1996)
-\end{thebibliography}
-
-\subsection{Integrable Quantum Many-Body Problems: Sutherland Spin Model, Affine Knizhnik-Zamolodchikov Equations, and More}
- \begin{align}
-\text{In this section, we delve into the integrable quantum many-body problems, with a focus on the Sutherland Spin Model, Affine Knizhnik-Zamolodchikov equations, and related topics.} \\
-\text{As previously defined, a quantum dynamical system is said to be \emph{quantum integrable} if it possesses $n$ algebraically independent operators $\widehat{H}, \dots, J_{n}$ that are pairwisely commutative, i.e., $[J_{i}, J_{j}] = 0$ for $i \neq j$.} \\
-\end{align}
-
-\begin{definition}
-If an $n$-dimensional quantum dynamical system has $n$ algebraically independent operators $J_{1} = \widehat{H}, \dots, J_{n}$ such that they are pairwisely commutative, i.e. $[ J_{i}, J_{j} ]=0$ for $i \neq j$, then the system is said to be \emph{quantum integrable} \cite{Rujsenaars}.
+\begin{definition}[Definition]
+Let $X,Z \in M_{NN}\left( \complex \right)$ be constant $N\times N$ matrices. The ordered Pair $\left(X,Z \right)$ is said to be a Calogero-Moser Pair (CM Pair) if and only if $\text{Rank}\left( [X,Z] - I \right)=\text{Rank}\lp XZ-ZX-I \rp=1$.
 \end{definition}
 
-\text{The quantum Calogero-Moser systems, including the rational and 3-dimensional cases, are known to be quantum integrable. This result can be verified via the Lax method as discussed in [\onlinecite{ExplicitComputationsCMS}].}
+The quantization of classical Calogero-Moser Systems (QCMS) is a process that transforms the classical integrable systems into quantum ones. This transformation is not uniquely defined, and various approaches exist in the literature.
 
-\text{The Sutherland Spin Model, a one-dimensional quantum many-body problem, is also an integral part of this discussion. It was first introduced by B. Sutherland in 1972 \cite{Su72}, and its integrable properties have been further studied in various works [\onlinecite{SS93, TSA95, Tu88, Tu92, Ya95, YT96]}.}
+\begin{equation}
+N_{-\beta,\alpha+\beta} = N_{-\alpha,-\beta}  = N_{\alpha+\beta,-\alpha}.
+\label{eq:three-N}
+\end{equation}
+is a relationship between matrix elements that arises in the context of QCMS.
 
-\text{Moreover, the Affine Knizhnik-Zamolodchikov equations play a crucial role in understanding the integrable structures of these systems. These equations provide a framework for constructing integrals of motion and solving the models.}
+The following equations provide examples of the evaluation of certain quantities in QCMS:
 
-\subsection{Calogero-Moser Systems in Physics and Mathematics}
- \begin{align}
-\text{In this section, we focus on the Calogero-Moser systems, which have significant implications in both physics and mathematics.} \\
-\text{A quantum dynamical system is said to be \emph{quantum integrable} if it possesses $n$ algebraically independent operators $J_{1} = \widehat{H}, \dots, J_{n}$, such that they are pairwisely commutative, i.e., $[ J_{i}, J_{j} ]=0$ for $i \neq j$. This concept was introduced by Ruijsenaars (Rujsenaars, 1972).} \\
-\text{The quantum Calogero-Moser system is an example of a quantum integrable system. Its integrability can be verified using the Lax method (see, for instance, [Source: Explicit Computations for the Classical and Quantum Integrability of the 3-Dimensional Rational Calogero-Moser System]).} \\
-\text{Integrable quantum many-body problems have been studied extensively, with the Sutherland Spin Model being a notable example. The Sutherland Spin Model was initially introduced by Sutherland (Sutherland, 1972) and has since been further developed and solved in collaboration with Shastry (Sutherland and Shastry, 1993; Taniguchi et al., 1995).} \\
-\text{The Calogero-Moser system is also closely related to quasi-exactly solvable problems and $sl(2)$ algebra (Turbiner, 1988, 1992), as well as multicomponent Calogero models of $B_N$-type confined in a harmonic potential (Yamamoto, 1995) and integrable $1/r^2$ spin chains with reflecting end (Yamamoto and Tsuchiya, 1996).} \\
-\end{align}
+\begin{equation}
+2f_{B_{2}}(q)=a^2g_Sg_L|\rho_L|^2\times
+   \left\{
+   \begin{array}{rl}
+      0& \mbox{rational}\\
+      2&\mbox{hyperbolic}\\
+      -2&\mbox{trigonometric}
+   \end{array}\right.\!\!\! =
+   a^2g_Sg_L\sum_{\rho\neq \sigma\in B_{2+}
+   }(\rho\cdot\sigma)
+   \times\left\{
+   \begin{array}{rl}
+      0& \mbox{rational}\\
+      1&\mbox{hyperbolic}\\
+      -1&\mbox{trigonometric}
+   \end{array}\right.
+   \label{fB2val}
+\end{equation}
 
-\bibliographystyle{plain}
-\begin{thebibliography}{10}
-    \bibitem{Rujsenaars} Ruijsenaars, S. Explicit Computations for the Classical and Quantum Integrability of the 3-Dimensional Rational Calogero-Moser System. Journal de Physique A: Mathematique et Theorique, Volume 46, Issue 10, 1985, Pages 2079-2092.
-    \bibitem{Su72} Sutherland, B. Exact results for a quantum many-body problem in one dimension. II. Phys. Rev. A {\bf 5}, 1372--1376 (1972).
-    \bibitem{SS93} Sutherland, B. and Shastry, B.S.: Solution of some integrable one-dimensional quantum systems. Phys. Rev. Lett. {\bf 71} 5--8 (1993).
-    \bibitem{TSA95} Taniguchi, N., Shastry, B.S. and Altshuler, B.L.: Random matrix model and the Calogero--Sutherland model: A novel current-density mapping. Phys. Rev. Lett. {\bf 75}, 3724--3727 (1995).
-    \bibitem{Tu88} Turbiner, A.V.: Quasi-exactly solvable problems and $sl(2)$ algebra. Commun. Math. Phys. {\bf 118}, 467--474 (1988).
-    \bibitem{Tu92} Turbiner, A.: Lie algebras and polynomials in one variable. J. Phys. A: Math. Gen. {\bf 25}, L1087--L1093 (1992).
-    \bibitem{Ya95} Yamamoto, T.: Multicomponent Calogero model of $B_N$-type confined in a harmonic potential. Phys. Lett. A {\bf 208}, 293--302 (1995).
-    \bibitem{YT96} Yamamoto, T. and Tsuchiya, O.: Integrable $1/r^2$ spin chain with reflecting end. J. Phys. A: Math. Gen. {\bf 29}, 3977--3984 (1996).
+The solutions to the $N$-body Calogero problem and the Calogero model have been explicitly solved, as well as their extensions involving supersymmetry and fermions (Brink et al., 1992, 1993, 1998). The connection between Calogero-Moser type few-body models and free oscillators has also been investigated (Gurappa et al., 1998).
+
+\begin{thebibliography}{9}
+\bibitem{Br}
+L.\, Brink, T.\,H.\, Hansson and M.\,A.\, Vasiliev, `` Explicit solution
+to
+the $N$ body Calogero problem", Phys. Lett. {\bf B286} (1992) 109-111,
+{\tt hep-th/9206049};
+L.\, Brink, T.\,H.\, Hansson, S.\, Konstein and M.\,A.\, Vasiliev,
+``The Calogero model: anyonic representation, fermionic extension and
+supersymmetry", Nucl. Phys. {\bf B401} (1993) 591-612,
+{\tt hep-th/9302023};
+L.\, Brink, A.\, Turbiner and N.\, Wyllard ``Hidden algebras of the
+(super) Calogero and Sutherland models", J. Math. Phys. {\bf 39} (1998)
+1285-1315,  {\tt hep-th/9705219}.
+
+\bibitem{EW}
+E.\, Witten, ``Dynamical breaking of supersymmetry",  Nucl. Phys. {\bf B188}
+(1981) 513-554.
+
+\bibitem{Dunk}
+C.\,F.\,Dunkl, ``Differential-difference operators associated to
+reflection groups", Trans. Amer. Math. Soc. {\bf 311} (1989) 167-183.
+
+\bibitem{AhNa}
+C.\, Ahn, K.-J.-B.\, Lee and S.\, Nam, ``Nonrelativistic factorizable
+ scattering theory of multicomponent
+Calogero-Sutherland model", Phys. Rev. {\bf A54} (1996) 4943-4946,
+{\tt  hep-th/9501023}.
+
+\bibitem{G2}
+J.~Wolfes, ``On the three-body linear problem with three-body
+interaction", J. Math. Phys. {\bf 15} (1974) 1420-1424;
+F.~Calogero and C. ~Marchioro, ``Exact solution of a one-dimensional
+three-body scattering problem with two-body and/or three-body
+inverse-square potential'', J. Math. Phys. {\bf 15}
+  (1974) 1425--1430;
+M.\,Rosenbaum, A.\, Turbiner and A. Capella, ``Solvability of the $g_2$
+integrable system", Int. J. Mod. Phys. {\bf A13} (1998) 3885-3904,
+{\tt solv-int/9707005};
+N. Gurappa, A.\,Khare and P.\, K. Panigrahi,
+``Connection between Calogero-Marchioro-Wolfes type few-body models and
+free oscillators", {\tt cond-mat/9804207}.
+\end{thebibliography}
+
+\subsection{VI. Applications of Quantum Calogero-Moser Systems}
+ \begin{equation}
+\text{A Quantum Calogero-Moser System (QCMS) has various applications in physics and mathematics.}
+\end{equation}
+
+\begin{definition}[Definition]
+Let $X,Z \in M_{NN}\left( \complex \right)$ be constant $N\times N$ matrices. The ordered Pair $\left(X,Z \right)$ is said to be a Calogero-Moser Pair (CM Pair) if and only if $\text{Rank}\left( [X,Z] - I \right)=\text{Rank}\lp XZ-ZX-I \rp=1$
+\end{definition}
+
+The applications of Quantum Calogero-Moser Systems are vast and diverse. They have been used in various areas such as statistical mechanics, integrable systems, representation theory, and quantum field theory. For instance, QCMS have been employed to study the deformations of the harmonic oscillator (source: Some Properties of an Infinite Family of Deformations of the Harmonic Oscillator) and the rational Calogero model based on the root system (source: Supertraces on the Superalgebra of Observables of Rational Calogero Model based on the Root System).
+
+References:
+\begin{thebibliography}
+\bibitem{Some Properties of an Infinite Family of Deformations of the Harmonic Oscillator}
+SI>{z6iE&F`3nnѴ+(t
+\bibitem{Supertraces on the Superalgebra of Observables of Rational Calogero Model based on the Root System}
+yH|*@LP1UP
+jaX+[b#>փΆdA|AftWIAIlB
 \end{thebibliography}                                                                                                                                                                                                              
                 
 \begin{thebibliography}{99}                                                                                                                                                                                    
-\bibitem{ref1} Calogero-Moser Systems as a Diffusion-Scaling Transform of Dunkl Processes on the Line.
-\bibitem{ref2} Explicit Computations for the Classical and Quantum Integrability of the 3-Dimensional Rational Calogero-Moser System.
-\bibitem{ref3} On the Sutherland Spin Model of B_N Type and its Associated Spin Chain.     
+\bibitem{ref1} Quantum Elliptic Calogero-Moser Systems from Gauge Origami.
+\bibitem{ref2} Exceptional Hermite Polynomials and Calogero-Moser Pairs.
+\bibitem{ref3} Sharp Hardy-Rellich Type Inequalities Associated with Dunkl Operators.
+\bibitem{ref4} Dunkl Operators for Arbitrary Finite Groups.
+\bibitem{ref5} Calogero-Moser Models V: Supersymmetry and Quantum Lax Pair.
+\bibitem{ref6} Quadratic Algebra associated with Rational Calogero-Moser Models.
+\bibitem{ref7} Supertraces on the Superalgebra of Observables of Rational Calogero Model based on the Root System.
+\bibitem{ref8} Some Properties of an Infinite Family of Deformations of the Harmonic Oscillator.
+\bibitem{ref9} Elliptic Calogero-Moser Systems and Isomonodromic Deformations.   
 \end{thebibliography}                                                                                                                                                                                            
                                                                                                                                                                                                                     
 \end{document}                                                                                                                                                                                                   

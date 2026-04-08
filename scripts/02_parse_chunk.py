@@ -19,14 +19,10 @@ MIN_CHUNK_CHARS = 100
 
 # Remove LaTeX comments (lines starting with % or inline %).
 def strip_comments(text):
-    lines = text.split("\n")
-    cleaned = []
-    for line in lines:
-        # Keep escaped % in TeX
-        result = re.sub(r"(?<!\\)%.*", "", line)
-
-        cleaned.append(result)
-    return "\n".join(cleaned)
+    # Remove comments while ignoring escaped percent signs \%
+    # This regex looks for % not preceded by \
+    text = re.sub(r"(?<!\\)%.*", "", text)
+    return text
 
 
 # Extract body between \\begin{document} and \\end{document}
@@ -233,12 +229,20 @@ def chunk_paper(paper_dir, metadata, is_style_paper=False):
                     "content": sub_chunk,
                     "custom_commands": custom_commands,
                     "is_style_paper": is_style_paper,
+                    "citation_key": generate_citation_key(metadata), # Add a suggested citation key
                 }
                 chunks.append(chunk)
                 chunk_index += 1
 
     return chunks
 
+
+def generate_citation_key(metadata):
+    """Generates a simple citation key from metadata (e.g., AuthorYear)."""
+    author_surname = metadata["authors"][0].split(" ")[-1] if metadata["authors"] else "Anon"
+    year = metadata.get("published", "YYYY-MM-DD").split("-")[0] # Use get with default for safety
+    # Ensure the key is LaTeX-safe (no special characters)
+    return re.sub(r'[^a-zA-Z0-9]', '', f"{author_surname}{year}")
 
 # Process all downloaded arXiv papers.
 def process_arxiv_papers(config):
@@ -325,4 +329,3 @@ def main():
  
 if __name__ == "__main__":
     main()
-

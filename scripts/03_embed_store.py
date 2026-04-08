@@ -45,6 +45,8 @@ def build_embed_text(chunk):
         parts.append(f"Section: {chunk['section']}")                                                                                                                                                                
     if chunk.get("chunk_type") and chunk["chunk_type"] != "text":                                                                                                                                                   
         parts.append(f"Type: {chunk['chunk_type']}")                                                                                                                                                                
+    if chunk.get("citation_key"):
+        parts.append(f"Citation Key: {chunk['citation_key']}")
                                                                                                                                                                                                                     
     parts.append(chunk["content"])                                                                                                                                                                                  
                                                                                                                                                                                                                     

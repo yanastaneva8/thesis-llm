@@ -1,4 +1,5 @@
 import json                                                                                                                                                                                                         
+import re
 from pathlib import Path                                                                                                                                                                                            
                                                                                                                                                                                                                     
 from src.config import METADATA_DIR, CHUNKS_DIR, STYLE_DIR                                                                                                                                                          
@@ -57,6 +58,7 @@ def chunk_paper(paper_dir, metadata, is_style_paper=False):
                     "chunk_type": chunk_type,                                                                                                                                                                       
                     "chunk_index": chunk_index,                                                                                                                                                                     
                     "content": sub_chunk,                                                                                                                                                                           
+                    "citation_key": generate_citation_key(metadata), # Add a suggested citation key
                     "custom_commands": custom_commands,                                                                                                                                                             
                     "is_style_paper": is_style_paper,                                                                                                                                                               
                 }                                                                                                                                                                                                   
@@ -65,6 +67,14 @@ def chunk_paper(paper_dir, metadata, is_style_paper=False):
                                                                                                                                                                                                                     
     return chunks                                                                                                                                                                                                   
                                                                                                                                                                                                                     
+def generate_citation_key(metadata):
+    """Generates a simple citation key from metadata (e.g., AuthorYear)."""
+    author_surname = metadata["authors"][0].split(" ")[-1] if metadata["authors"] else "Anon"
+    year = metadata.get("published", "YYYY-MM-DD").split("-")[0] # Use get with default for safety
+    # Ensure the key is LaTeX-safe (no special characters)
+    return re.sub(r'[^a-zA-Z0-9]', '', f"{author_surname}{year}")
+
+
                                                                                                                                                                                                                     
 def process_all():
     """Process all arXiv + style papers into chunks."""                                                                                                                                                             
